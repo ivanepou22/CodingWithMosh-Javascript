@@ -22,11 +22,11 @@ let run2 = function run1() {
 function sum() {
     let total = 0;
     for (let value of arguments)
-        total+=value;
+        total += value;
     console.log(total)
 }
 
-var rock = function(){
+var rock = function () {
     console.log("Rock")
 }
 
@@ -37,20 +37,20 @@ var rock = function(){
 //Rest operator
 // Rest Parameter must be the last formal parameter
 function sum1(...args) {
-    return args.reduce((a ,b) => a+b)
+    return args.reduce((a, b) => a + b)
 }
 
 function sum2(discount, ...prices) {
-   const total = prices.reduce((a, b) => a + b);
-   return total * (1 - discount);
+    const total = prices.reduce((a, b) => a + b);
+    return total * (1 - discount);
 }
 
 // console.log(sum2(0.1, 20,30))
 
 //default parameters
 //ones u give a parameter a default value, all other values after than should a default value.
-function interest(principal, rate = 3.5, years = 5){
-    return principal * rate/100 * years;
+function interest(principal, rate = 3.5, years = 5) {
+    return principal * rate / 100 * years;
 }
 
 // console.log(interest(10000,3.5,5))
@@ -62,7 +62,7 @@ const person = {
     firstName: 'Ivan',
     lastName: 'Epou',
     //getter
-    get fullName(){
+    get fullName() {
         return `${person.firstName} ${person.lastName}`
     },
     //setters
@@ -82,7 +82,7 @@ const person1 = {
     firstName: 'Ivan',
     lastName: 'Epou',
     //getter
-    get fullName(){
+    get fullName() {
         return `${person1.firstName} ${person1.lastName}`
     },
     //setters
@@ -101,7 +101,7 @@ const person1 = {
 
 try {
     person1.fullName = true;
-} catch(e) {
+} catch (e) {
     console.log(e);
 }
 
@@ -111,3 +111,62 @@ try {
 //var keyword -> attaches a global variable to a window object.
 //let keyword -> does not attach a global variable to a window object.
 //Global functions are added to the window object.
+
+//The (this) keyword
+//Represents the object that is executing the current function.
+const video = {
+    title: 'a',
+    tags: ['a', 'b', 'c'],
+    showTags() {
+        this.tags.forEach(function (tag) {
+            console.log(this.title, tag)
+        }, this)
+    }
+}
+
+//Changing the value of (this).
+const video1 = {
+    title: 'a',
+    tags: ['a', 'b', 'c'],
+    showTags() {
+        const self = this; //change this
+        this.tags.forEach(function (tag) {
+            console.log(self.title, tag)
+        })
+    }
+}
+
+//approach two. (call and apply);
+
+function playVideo(){
+    console.log(this);
+}
+
+playVideo.call({name: 'Ivan'}, 1,2,30); //call()
+playVideo.apply({name: 'Ivan'}, [1,2,3,4]); //apply()
+playVideo.bind({name: 'Ivan'})(); //bind - Returns a function
+
+//use the bind method
+const video2 = {
+    title: 'a',
+    tags: ['a', 'b', 'c'],
+    showTags() {
+        this.tags.forEach(function (tag) {
+            console.log(this.title, tag)
+        }.bind(this));
+    }
+}
+
+//using Arrow functions - Arrow functions inherit the this object.
+
+const video3 = {
+    title: 'a',
+    tags: ['a', 'b', 'c'],
+    showTags() {
+        this.tags.forEach(tag => {
+            console.log(this.title, tag)
+        })
+    }
+}
+
+video3.showTags();
