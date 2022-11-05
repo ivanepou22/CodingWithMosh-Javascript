@@ -105,4 +105,9 @@ try {
     console.log(e);
 }
 
-console.log(person1)
+//Scopes (Local and Global)
+//var => function scope
+//ES6 (ES2015): let, let => block-scoped
+//var keyword -> attaches a global variable to a window object.
+//let keyword -> does not attach a global variable to a window object.
+//Global functions are added to the window object.
