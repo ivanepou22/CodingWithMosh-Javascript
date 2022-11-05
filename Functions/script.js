@@ -72,5 +72,37 @@ const person = {
         this.lastName = parts[1];
     }
 };
-person.fullName = 'Dyron Smith',
-console.log(person)
+person.fullName = 'Dyron Smith';
+// console.log(person)
+
+//Error Handling
+//Defensive Programming - Handling errors at the beginning of the function.
+
+const person1 = {
+    firstName: 'Ivan',
+    lastName: 'Epou',
+    //getter
+    get fullName(){
+        return `${person1.firstName} ${person1.lastName}`
+    },
+    //setters
+    set fullName(value) {
+        if (typeof value !== 'string')
+            throw new Error('Value is not a string') //throw exceptions.
+
+        const parts = value.split(' ');
+        if (parts.length !== 2)
+            throw new Error('Enter a valid fullName Pliz.')
+
+        this.firstName = parts[0];
+        this.lastName = parts[1];
+    }
+};
+
+try {
+    person1.fullName = true;
+} catch(e) {
+    console.log(e);
+}
+
+console.log(person1)
