@@ -26,4 +26,33 @@ function sum() {
     console.log(total)
 }
 
-sum(1, 2, 5, 3);
+var rock = function(){
+    console.log("Rock")
+}
+
+
+//hoisting -> this is the process of moving function declarations
+//to the top of the file.
+
+//Rest operator
+// Rest Parameter must be the last formal parameter
+function sum1(...args) {
+    return args.reduce((a ,b) => a+b)
+}
+
+function sum2(discount, ...prices) {
+   const total = prices.reduce((a, b) => a + b);
+   return total * (1 - discount);
+}
+
+// console.log(sum2(0.1, 20,30))
+
+//default parameters
+//ones u give a parameter a default value, all other values after than should a default value.
+function interest(principal, rate = 3.5, years = 5){
+    return principal * rate/100 * years;
+}
+
+// console.log(interest(10000,3.5,5))
+
+//Getters and setters
